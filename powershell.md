@@ -1,8 +1,57 @@
 
+### PoweShellの実行ファイルのパス
+
+|環境|パス|エイリアス|
+|:--|:--|:--|
+|Windows PoweShell|%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe|
+|PowerShell 7 (Windows)|%SystemRoot%\Program Files\PowerShell\7\pwsh.exe|
+|PowerShell 7 (macOS)|/usr/local/microsoft/powershell/7/pwsh|/usr/local/bin/pwsh|
+|PowerShell 7 (Linux)|/opt/microsoft/powershell/7/pwsh|/usr/bin/pwsh|
+
+
+### コマンドレット
+|コマンドレット|エイリアス|内容|パラメーター|
+|:--|:--|:--|:--|
+|Get-Help|help<br>man|コマンドレットのヘルプを参照する。<br>```Get-Help <cmdletの名前> -Full```<br>```Get-Help <cmdletの名前> -Parameter <パラメータの名前>```<br><br>コマンドレットの名前があやふやでもそのまま検索できるが、全てのコマンドレットが検索対象になるわけではなく、ヘルプが存在するものだけが検索対象となる。利用可能なコマンド全てを検索対象にしたい場合は、```Get-Command```を使った方が良さげ。|```-Full```ヘルプの内容全てを表示する。パラメーターの一覧、利用例、出力型が表示される。つけないと情報量が削られて表示されるので、常につけておくくらいでいい。<br><br>```-Example```利用例だけを表示する。<br><br>```-Parameters```パラメーターだけを表示する。オプションで特定のパラメーターを指定することもでいる。<br><br>```-Detailed```パラメーターの詳細を表示するが、利用例は表示しない。<br><br>```-Online```
+|Update-Help|-|ヘルプがアップデートされる。日本語のヘルプは少ないので、以下のようにオプションを指定して英語版を入れる。<br>``` Update-Help -Force -UICulture en-US```|```-Force```UpdateHelpは1日1回程度しか行われない。このパラメーターで何度でも実行できる。<br><br>```-UICulture```ヘルプファイルの言語を指定する。指定がないと現在のPowerShellの言語環境となるが、大体の場合英語のマニュアルしかないことが多いので、普通はこのパラメータをつけて更新する。<br><br>```-Modle```モジュールを指定してヘルプをアップデートできる。<br><br>```-Online```ブラウザでweb上のマニュアルを閲覧できる。|
+|Get-ChildItem|ls<br>dir<br>gci|ディレクトリの中身を取得する。<br>```Get-ChildItem -Path c:/Users/ryo_furutani/Downloads```|```-File```ファイルだけ取得。<br><br>```-Directory```ディレクトリだけ取得。|
+|Show-Command|-|GUIでコマンドレットのパラメーターを入力できる。<br>```Show-Command -Name <cmdletの名前>```|```-Name```コマンドレット名を指定する。|
+
+
+### 改行
+PowerShellでは改行で文が終了する。
+複数の文を1行に収めたい場合は、セミコロン```;```でつなぐ。
+
+
+```powershell
+PS> "Hi!"
+Hi
+```
+↓
+```powershell
+PS> "Hi!" ; "I'm John." ; "What's your name?"
+Hi!
+I'm John.
+What's your name?
+```
+逆に1行を2行以上に跨いで書きたい場合は、バッククォート``` ` ```を使う。
+```powershell
+PS> Invoke-RestMethod -Method Get -Uri https://google.com -SslProtocol Tls2 -TimeoutSec 10 -SkipHeaderValidation -OutFile c:/google.html
+```
+↓
+```powershell
+PS> Invoke-RestMethod `
+-Method Get `
+-Uri https://google.com `
+-SslProtocol Tls2 `
+-TimeoutSec 10 `
+-SkipHeaderValidation `
+-OutFile c:/User/ryo_furutani/downloads/google.html
+```
 ### 自動変数 (Automatic Variables)
 
-|変数名|内容|例
-|:--|:--|:--
+|変数名|内容|例|
+|:--|:--|:--|
 |$PROFILE|Profileの場所|PowerShellは、C:\Users\ryo_furutani\Documents\PowerShell\Microsoft.PowerShell_profile.ps1<br>Windows PowerShellは、C:\Users\ryo_furutani\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 |$PSVersinTable|バージョンの確認|
 |$HOME|ホームディレクトリ|
