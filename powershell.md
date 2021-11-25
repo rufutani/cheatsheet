@@ -9,13 +9,49 @@
 |PowerShell 7 (Linux)|/opt/microsoft/powershell/7/pwsh|/usr/bin/pwsh|
 
 
+
 ### コマンドレット
 |コマンドレット|エイリアス|内容|パラメーター|
 |:--|:--|:--|:--|
-|Get-Help|help<br>man|コマンドレットのヘルプを参照する。<br>```Get-Help <cmdletの名前> -Full```<br>```Get-Help <cmdletの名前> -Parameter <パラメータの名前>```<br><br>コマンドレットの名前があやふやでもそのまま検索できるが、全てのコマンドレットが検索対象になるわけではなく、ヘルプが存在するものだけが検索対象となる。利用可能なコマンド全てを検索対象にしたい場合は、```Get-Command```を使った方が良さげ。|```-Full```ヘルプの内容全てを表示する。パラメーターの一覧、利用例、出力型が表示される。つけないと情報量が削られて表示されるので、常につけておくくらいでいい。<br><br>```-Example```利用例だけを表示する。<br><br>```-Parameters```パラメーターだけを表示する。オプションで特定のパラメーターを指定することもでいる。<br><br>```-Detailed```パラメーターの詳細を表示するが、利用例は表示しない。<br><br>```-Online```
+|Get-Help|help,<br>man|コマンドレットのヘルプを参照する。<br>```Get-Help <cmdletの名前> -Full```<br>```Get-Help <cmdletの名前> -Parameter <パラメータの名前>```<br><br>コマンドレットの名前があやふやでもそのまま検索できるが、全てのコマンドレットが検索対象になるわけではなく、ヘルプが存在するものだけが検索対象となる。利用可能なコマンド全てを検索対象にしたい場合は、```Get-Command```を使った方が良さげ。|```-Full```ヘルプの内容全てを表示する。パラメーターの一覧、利用例、出力型が表示される。つけないと情報量が削られて表示されるので、常につけておくくらいでいい。<br><br>```-Example```利用例だけを表示する。<br><br>```-Parameters```パラメーターだけを表示する。オプションで特定のパラメーターを指定することもでいる。<br><br>```-Detailed```パラメーターの詳細を表示するが、利用例は表示しない。<br><br>```-Online```
 |Update-Help|-|ヘルプがアップデートされる。日本語のヘルプは少ないので、以下のようにオプションを指定して英語版を入れる。<br>``` Update-Help -Force -UICulture en-US```|```-Force```UpdateHelpは1日1回程度しか行われない。このパラメーターで何度でも実行できる。<br><br>```-UICulture```ヘルプファイルの言語を指定する。指定がないと現在のPowerShellの言語環境となるが、大体の場合英語のマニュアルしかないことが多いので、普通はこのパラメータをつけて更新する。<br><br>```-Modle```モジュールを指定してヘルプをアップデートできる。<br><br>```-Online```ブラウザでweb上のマニュアルを閲覧できる。|
-|Get-ChildItem|ls<br>dir<br>gci|ディレクトリの中身を取得する。<br>```Get-ChildItem -Path c:/Users/ryo_furutani/Downloads```|```-File```ファイルだけ取得。<br><br>```-Directory```ディレクトリだけ取得。|
-|Show-Command|-|GUIでコマンドレットのパラメーターを入力できる。<br>```Show-Command -Name <cmdletの名前>```|```-Name```コマンドレット名を指定する。|
+|Get-ChildItem|ls,<br>dir,<br>gci|ディレクトリの中身を取得する。<br>```Get-ChildItem -Path c:/Users/ryo_furutani/Downloads```|```-File```ファイルだけ取得。<br><br>```-Directory```ディレクトリだけ取得。|
+|Show-Command|-|GUIでコマンドレットのパラメーターを入力できる。Windowsでのみ有効で、macOSやLinuxでは使用できない。<br>```Show-Command -Name <cmdletの名前>```|```-Name```コマンドレット名を指定する。|
+|Write-Output|echo|
+
+
+---
+
+### エスケープシーケンス
+
+バッククォート``` ` ```で特殊記号をエスケープできる。
+```powershell
+PS> Write-Output `"
+"
+```
+```powershell
+PS> "`$"
+$
+```
+```powershell
+PS> $str = "`$"
+PS> $str
+$
+```
+
+|エスケープ文字|意味|機能|
+|:--|:--|:--|
+|`0|Null|$null|
+|`a|Alert|アラート音の発生|
+|`b|Backspace|前の文字の削除|
+|`e|Escape|ANSIエスケープシーケンスに従ってテキストを装飾する|
+|`f|Form feed|プリンタのページ送りにのみ使用する
+|`n|New line|LFに相当し、改行する|
+|`r|Carrige return|CRに相当し、その前の入力を続く文字で上書きする|
+|`t|Tab|横方向タブ|
+|`u{x}|Unicode Escape Sequence|ユニコード文字をエスケープする|
+|`v|Vertical quote|縦方向タブを入力するが、印刷時に影響する|
+|--%|stop parsing|PowerShellのパーサー解釈と止める|
 
 
 ### 改行
@@ -29,12 +65,13 @@ Hi
 ```
 ↓
 ```powershell
-PS> "Hi!" ; "I'm John." ; "What's your name?"
+PS> "Hi!" ; "I am John." ; "What is your name?"
 Hi!
-I'm John.
-What's your name?
+I am John.
+What is your name?
 ```
 逆に1行を2行以上に跨いで書きたい場合は、バッククォート``` ` ```を使う。
+
 ```powershell
 PS> Invoke-RestMethod -Method Get -Uri https://google.com -SslProtocol Tls2 -TimeoutSec 10 -SkipHeaderValidation -OutFile c:/google.html
 ```
@@ -48,6 +85,9 @@ PS> Invoke-RestMethod `
 -SkipHeaderValidation `
 -OutFile c:/User/ryo_furutani/downloads/google.html
 ```
+ダブルクォートの前にスペースが必要なことに注意。
+
+
 ### 自動変数 (Automatic Variables)
 
 |変数名|内容|例|
@@ -71,8 +111,61 @@ PS> Invoke-RestMethod `
 |$False|偽のBool値|
 
 ---
+### スクリプトブロック
+波括弧```{}```で囲うとスクリプトブロックとなる。
+```powershell
+PS> Write-Output "hoge"
+hoge
+PS> {Write-Output "hoge"}
+PS>
+```
+スクリプトブロックは、アンパサンド```&```かドットソース```.```を頭につけることで実行される。
+
+もしくは```Invoke-Command```コマンドレットで実行される。
+```powershell
+PS> & {Write-Output "hoge"}
+hoge
+PS> . {Write-Output "hoge"}
+hoge
+PS> Invoke-Command -ScriptBlock {Write-Output "hoge"}
+hoge
+```
+
 
 # 文字列
+
+### ヒア文字列
+
+ヒア文字列```@" <文字列> "@```、```@' <文字列> '@```で囲うと、```"```や```'```を書ける。
+
+```powershell
+PS> $test = 1
+PS> $a = @"
+example string
+$test
+"test"
+'test'
+"@
+PS> $a
+example string
+1
+"test"
+'test'
+```
+ヒア文字列を使わない場合は、バッククォート``` ` ```でエスケープする必要がある。
+```powershell
+PS> $test = 1
+PS> $a = "example string
+$test
+`"test`"
+'test'"
+PS> $a
+example string
+1
+"test"
+'test'
+```
+
 
 ### formatを使わない書き方
 変数をそのまま入れると、
