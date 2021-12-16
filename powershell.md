@@ -367,6 +367,55 @@ AAAA1234
 ---
 ```
 
+### 指定した文字で分割して配列にする
+
+```Split(<分割したい文字列>)```メソッドを使う。
+```powershell
+$str = "谷川,福崎,羽生"
+$separator = ","
+$array = $str.Split($separator)
+for ($i = 0; $i -lt $array.Length; ++$i){
+    Write-Host $array[$i]
+}
+---
+谷川
+福崎
+羽生
+---
+```
+### 指定した位置と文字数分だけ文字列を取得する
+```SubString(<開始位置>, <取得したい文字数>)```
+```powershell
+$str = "Hello, World!"
+$start = 7
+$length = 5
+$str.SubString($start, $length)
+---
+World
+---
+```
+
+### 大文字、小文字に変換する
+```ToUpper()```、```ToLower()```メソッドを使う。
+```powershell
+PS> $str = "Hello, World!"
+PS> $str.ToUpper()
+HELLO, WORLD!
+PS> $str.ToLower()
+hello, world!
+```
+
+### 空白を削除する
+両端から空白を削除したい場合は、```Tirm()```メソッドを使う。
+```powershell
+$str = "     Hello, World!!!    "
+$str.Trim()
+```
+文字列の両端の空白は削除されるが、途中に含まれる空白は削除されない。この場合は、```,```と```W```の間の空白は削除されない。
+
+左端、右端それぞれの空白を削除したいときは```TrimStart()```、```TrimEnd()```メソッドを使う。
+
+
 ---
 
 # 数値
@@ -401,7 +450,35 @@ $val_zero8 = "{0,d8}" -f $val
 
 ### 小数
 
-#### 小数4桁
+### 切り上げ、切り捨て、四捨五入、絶対値
+
+```[Math]::Ceiling(<数値>)```で切り上げ、```[Math]::Floor(<数値>)```で切り捨て、```[Math]::Round(<数値>)```で四捨五入、```[Math]::Abs(<数値>)```で絶対値を取得できる。
+```powershell
+$foo = 1234.567
+$bar = 123.4567
+$fooMinus = -1 * $foo
+$barMinus = -1 * $bar
+[Math]::Ceiling($foo)
+[Math]::Floor($foo)
+[Math]::Round($foo)
+[Math]::Abs($fooMinus)
+[Math]::Ceiling($bar)
+[Math]::Floor($bar)
+[Math]::Round($bar)
+[Math]::Abs($barMinus)
+---
+1235
+1334
+1235
+1234.567
+124
+123
+123
+123.4567
+---
+```
+
+#### 小数4桁にする
 ```powershell
 $val = 12.3456789
 $val_4_0 = "{0:.0000}" -f $val
@@ -412,7 +489,7 @@ $val = 12.456789
 $val_4_0 = "{0:.f4}" -f $val
 ```
 出力はこうなる。
-`ell
+```powershell
 12.3456
 ```
 #### 整数4桁、小数4桁
@@ -424,6 +501,7 @@ $val_4_0 = "{0:0000.0000}" -f $val
 ```powershell
 0012.3456
 ```
+
 
 ---
 
