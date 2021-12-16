@@ -266,6 +266,107 @@ nは引数が1つしかなくても省略できないので、0を入れる。
 こんにちは、福崎文吾さん。
 ```
 
+### 文字列を調べる
+#### 文字列長を取得する
+```Length```メソッドを使う。
+```powershell
+$str = "Hello, World!"
+$str.Length
+---
+結果：13
+```
+
+#### 指定した文字列が含まれているか取得する
+```Contains()```メソッドを使う。
+```powershell
+$str = "Hello, World!"
+$foo = "and"
+$bar = "or"
+$str.Contains($foo)
+$str.Contains($bar)
+---
+False
+True
+```
+#### ある文字列が空かどうか取得する
+スタティックメソッド```[str]::IsNullOrEmpty()```を使用する。
+```powershell
+$str1 = "Hello, World!"
+$str2 = $null
+$str3 = ""
+[string]::IsNullOrEmpty($str1)
+[string]::IsNullOrEmpty($str2)
+[string]::IsNullOrEmpty($str3)
+---
+False
+True
+True
+```
+
+#### 文字列の内容を置換する
+```Replace(<置き換えられる文字列>, <新しい文字列>)```メソッドを使う。
+
+```powershell
+$country1 = "Japan"
+$country2 = "US"
+$str = "Welcome to {0}!!!" -f $country1
+$str
+---
+Welcome to Japan!!!
+---
+$str = $str.Replace($country1, $country2)
+$str
+---
+Welcome to US!!!
+---
+```
+
+#### 指定した文字列の開始位置を調べる
+先頭からの位置は```IndexOf()```メソッド使う。
+指定した文字列が存在しない場合は```-1```が返ってくる。
+```powershell
+$str = "Hello, World!"
+$foo = "and"
+$bar = "or"
+$str.IndexOf($foo)
+$str.IndexOf($bar)
+---
+-1
+8
+---
+```
+末尾からの位置は```LastIndexOf()```メソッドを使う。
+```powershell
+$str = "Hello, World!"
+$foo = "o"
+$str.IndexOf($foo) 
+$str.LastIndexOf($foo)
+---
+4
+8
+---
+```
+↑の例の場合、```o```は先頭から5文字目と9列目に存在する。```IndexOf()```は前者を見つけるため```4```を返し、```LastIndexOf()```は後者を見つけるため```8```を返す。
+
+#### 文字列に余白や文字列を埋め込む
+先頭に文字列を足したい場合は、```Padleft(<文字列を埋め込んだ後の文字数>, <埋め込む文字列>)```メソッドを使う。
+末尾に足したい場合は、```PadRight(,)```。
+埋め込む文字列を指定しなければ、スペースが足される。
+```powershell
+$str1 = "1234"
+$str2 = "5678"
+$foo = "0"
+$bar = "A"
+$str1.PadLeft(5, $foo)
+$str2.PadLeft(5)
+$str1.PadLeft(8, $bar)
+---
+01234
+ 4567
+AAAA1234
+---
+```
+
 ---
 
 # 数値
