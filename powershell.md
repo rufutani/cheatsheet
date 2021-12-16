@@ -121,16 +121,78 @@ PS>
 ```
 スクリプトブロックは、アンパサンド```&```かドットソース```.```を頭につけることで実行される。
 
-もしくは```Invoke-Command```コマンドレットで実行される。
 ```powershell
 PS> & {Write-Output "hoge"}
 hoge
 PS> . {Write-Output "hoge"}
 hoge
+```
+もしくは```Invoke-Command```コマンドレットで実行される。
+```powershell
 PS> Invoke-Command -ScriptBlock {Write-Output "hoge"}
 hoge
 ```
+スクリプトブロックを作ると、「Scriptbliock型」になるので、```Invoke```メソッドを呼び出して実行することもできる。
+```powershell
+PS> {Write-Output "hoge"}.Invoke()
+hoge
+```
+```$a = Get-Uptime```という記述では、コマンドレット```Get-Uptime```の出力結果が変数```$a```に格納される。そのため、```$a```を後から呼び出しても、格納時の値が呼び出されるだけとなる。
 
+```powershell
+PS> $a = Get-Uptime
+a.Ticks
+
+PS> $a.Ticks
+791720000000
+
+PS> $a.Ticks
+791720000000
+
+PS> $a.Ticks
+791720000000
+```
+↓のようにスクリプトブロックにして変数に格納すると、後から変数を任意のタイミングで呼び出すことができる。
+
+```powershell
+$a = {(Get-Uptime).Ticks}
+
+& $a
+815220000000
+
+& $a
+815250000000
+```
+スクリプトブロックには複数の文を格納することもできる。
+```powershell
+PS> $c = {
+Get-Date
+(Get-Uptime).Ticks
+}
+
+PS> & $c
+2021年11月25日 木曜日 19:48:36
+799620000000
+
+PS> & $c
+2021年11月25日 木曜日 19:48:49
+799750000000
+```
+スプリクトブロックは波括弧で囲う以外にも、文字列として書いておき後から利用するという方法がある。この場合はscriptblock型のスタティックメソットの```Create```メソッドに文字列を渡す。
+
+```powershell
+PS> $command = "(Get-Uptime).Ticks"
+PS> $a = [scriptblock]::Create($command)
+
+PS> & $a
+807850000000
+
+PS> & $a
+808020000000
+
+PS> & $a
+808180000000
+```
 
 # 文字列
 
