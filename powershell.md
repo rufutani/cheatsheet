@@ -450,9 +450,9 @@ $val_zero8 = "{0,d8}" -f $val
 
 ### 小数
 
-### 切り上げ、切り捨て、四捨五入、絶対値
+#### 切り上げ、切り捨て、四捨五入、絶対値
 
-```[Math]::Ceiling(<数値>)```で切り上げ、```[Math]::Floor(<数値>)```で切り捨て、```[Math]::Round(<数値>)```で四捨五入、```[Math]::Abs(<数値>)```で絶対値を取得できる。
+```[Math]::Ceiling(<数値>)```で切り上げ、```[Math]::Floor(<数値>)```で切り捨て、```[Math]::Round(<数値>)```で四捨五入した値を取得できる。
 ```powershell
 $foo = 1234.567
 $bar = 123.4567
@@ -502,8 +502,30 @@ $val_4_0 = "{0:0000.0000}" -f $val
 0012.3456
 ```
 
+### 絶対値
 
+```[Math]::Abs(<数値>)```メソッドで絶対値を取得できる。
+```powershell
+$foo = 1234.567
+$bar = 123.4567
+$fooMinus = -1 * $foo
+$barMinus = -1 * $bar
+$foo
+$bar
+$fooMinus
+$barMinus
+[Math]::Abs($fooMinus)
+[Math]::Abs($barMinus)
 ---
+1234.567
+123.4567
+-1234.567
+-123.4567
+1234.567
+123.4567
+---
+```
+
 
 ### 桁区切り
 
@@ -658,13 +680,26 @@ C:\Users\ryo_furutani
 この例だと、1階層潜って`\downloads`フォルダに入った後でも`$dir_at_this_point`に`$PWD`を格納した時点での情報を得ることができている。
 
 ---
+### ファイル、フォルダーの作成 | New-Item / mkdir
+`New-Item`コマンドでファイルやフォルダーを作成することができる。
+```powershell
+New-Item ./test.txt -ItemType File -Force
+New-Item ./test -ItemType Directory -Force
+```
+`-Force`オプションをつけることで、同名のファイルやフォルダーがあっても強制的に上書きすることができる。
 
-### ディレクトリ作成 | mkdir
-`mkdir フォルダー名`でフォルダーを作成する。
-`-Force`をつけることで、既に同名のフォルダーがあった際のエラーを無視できる。
+作成するファイルに文字列を書き込みたいときは、`-Value`オプションを使用する。
+```powershell
+New-Item ./test.txt -ItemType File -Value "Hello, World！！" -Force
+```
+これで`Hello, World!!`と書き込まれたtxtが作成される。
+
+なお、ファイルやフォルダー作成時に指定したfile pathに存在しないフォルダーが指定された場合は、そのフォルダーが作成される。
+
+`mkdir フォルダー名`でもフォルダーを作成できる。
 
 ```powershell
-cd　mkdir フォルダー名 -Force
+cd mkdir ./test -Force
 ```
 
 ---
@@ -693,9 +728,14 @@ ls -File
 ### キーワードでディレクトリ内のファイルを探す
 
 ```powershell
-ls *探したいキーワード*
+Get-ChildItem *探したいキーワード*
 ```
 *なしの`探したいキーワード`なら完全一致、`探したいキーワード*`なら前方一致、`*探したいキーワード`なら後方一致となる。
+
+フルパスを取得したいときは、
+```powershell
+Resove-Path *探したいキーワード*
+```
 
 ---
 
@@ -715,6 +755,24 @@ New-Item -Path ファイル名.txt
 NI -Path ファイル名.txt
 ```
 
+---
+### ファイルやフォルダーをコピーする
+`Copy-Item`コマンドを使う。
+```powershell
+Copy-Item ./test.txt ./test_copy.txt -Force
+```
+`-Force`で同名のファイルやフォルダーがあっても上書きすることができる。
+
+`-Recurese`でサブフォルダーもコピーの対象となる。
+
+`-Include`オプションを使用することで、パターンに合致するファイルをまとめてコピーすることができる。ワイルドカードも使用できる。↓の例だと、.txtの拡張子を持つファイルをコピーする。
+```powershell
+Copy-Item test/* test2 -Recurse -Force -Include *.txt
+```
+逆に.txtを除きたいときは`-Exclude`を使う。
+```powershell
+Copy-Item test/* test2 -Recurse -Force -Exclude *.txt
+```
 ---
 
 ### 複数のファイル作成
@@ -737,7 +795,72 @@ NI -Path ファイル名.txt
 ```
 
 ---
+### ファイルやフォルダーを削除する
 
+`Remove-Item`を使う。
+```powershell
+Remove-Item test2
+```
+フォルダーを削除する際に警告を出したくないときは、`-Recurese`をつける。
+読み取り属性を削除する際の警告を出したくないときは、`-Force`をつける。
+
+---
+### ファイルの作成日時/最終更新日時/最終アクセス日時を取得する
+
+`Get-ItemProperty`でファイルの情報を取得できる。
+```powershell
+Get-ItemProperty C:\Users\ryo_furutani\Downloads\test\test.txt
+```
+作成日時などを個別に取得することもできる。
+```powershell
+$file = Get-ItemProperty C:\Users\ryo_furutani\Downloads\test\test.txt
+$file.CreationTime
+$file.LastWriteTime
+$file.LastAccessTime
+```
+
+---
+### ファイルやフォルダーを起動する。
+`Invoke-Item`コマンドを使う。
+
+フォルダーをエクスプローラーで見たいときは、↓のような感じ。
+```powershell
+Invoke-Item C:\Users\ryo_furutani\Downloads\test
+```
+ファイルを関連付けられたアプリで起動したいときは、↓のような感じ。
+```powershell
+Invoke-Item C:\Users\ryo_furutani\Downloads\test\test.txt
+```
+変数も使える。
+```powershell
+Invoke-Item $pwd
+```
+```powershell
+$file = "C:\Users\ryo_furutani\Downloads\test\test.txt"
+Invoke-Item $file
+```
+ワイルドカードも使える。
+```powershell
+$file = "C:\Users\ryo_furutani\Downloads\test\*.txt"
+Invoke-Item $file
+```
+---
+
+### ファイル内の文字列を検索する
+
+`Select-String`コマンドを使う。
+```powershell
+Select-String 検索したい文字 検索したいファイルのパス
+```
+例。
+```powershell
+Select-String ”Hello, World” ./test/test.txt
+---
+test\test.txt:1:Hello, World！！
+---
+```
+
+---
 ### ファイルをリネームする
 以下で`before.txt`を`after.txt`にリネームできる。ファイル名にスペースを挟まないこと。リネーム後のファイル名は`-NewName`の後に書かなくてはいけないことに注意。
 ```powershell
