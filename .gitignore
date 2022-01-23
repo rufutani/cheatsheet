@@ -3,3 +3,4 @@ desktop.ini
 .DS_Store
 *.pem
 *.ppk
+node_modules
