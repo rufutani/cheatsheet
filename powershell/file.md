@@ -91,7 +91,7 @@ ls -File
 ### キーワードでディレクトリ内のファイルを探す
 
 ```powershell
-Get-ChildItem *探したいキーワード*
+Get-ChildItem <探したいキーワード>
 ```
 *なしの`探したいキーワード`なら完全一致、`探したいキーワード*`なら前方一致、`*探したいキーワード`なら後方一致となる。
 
@@ -253,7 +253,7 @@ Split-Path C:\Users\ryo_furutani
 ```powershell
 Split-Path ./test/aaa.txt
 >>> test
-Split-Path C:\Users\username\test
+Split-Path C:\Users\username\test\aaa.text
 >>> C:\Users\username\test
 ```
 ファイル名を取得したい場合は、`-Leaf`オプションを付ける。

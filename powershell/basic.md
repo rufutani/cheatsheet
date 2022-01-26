@@ -32,7 +32,7 @@ $
 
 ### 改行
 PowerShellでは改行で文が終了する。
-複数の文を1行に収めたい場合は、セミコロン```;```でつなぐ。
+複数の文を1行に収めたい場合は、セミコロン`;`でつなぐ。
 
 
 ```powershell
@@ -61,7 +61,7 @@ PS> Invoke-RestMethod `
 -SkipHeaderValidation `
 -OutFile c:/User/ryo_furutani/downloads/google.html
 ```
-ダブルクォートの前にスペースが必要なことに注意。
+バッククォートの前にスペースが必要なことに注意。
 
 
 ### 自動変数 (Automatic Variables)
@@ -82,7 +82,7 @@ PS> Invoke-RestMethod `
 |$MyInvocation|実行コマンド自身の情報|
 |$OFS|awkでお馴染みの出力時フィールドセパレータ|
 |$PsVersionTable|PowerShellのバージョン情報|
-|$Pwd|ドライブレター込みのカレントディレクトパス|
+|$PWD|ドライブレター込みのカレントディレクトパス|
 |$True|真のBool値|
 |$False|偽のBool値|
 

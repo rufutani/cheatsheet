@@ -4,7 +4,8 @@
 |環境|パス|エイリアス|
 |:--|:--|:--|
 |Windows PoweShell|%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe|
-|PowerShell 7 (Windows)|%SystemRoot%\Program Files\PowerShell\7\pwsh.exe|
+|PowerShell 7 (Windows)|%PROGRAMFILES%\PowerShell\7\pwsh.exe|.msiで手動でインストールした場合
+|PowerShell 7 (Windows)|%PROGRAMFILES%\WindowsApps\バージョンによって異なる|Microsoft Store経由でインストールした場合
 |PowerShell 7 (macOS)|/usr/local/microsoft/powershell/7/pwsh|/usr/local/bin/pwsh|
 |PowerShell 7 (Linux)|/opt/microsoft/powershell/7/pwsh|/usr/bin/pwsh|
 
