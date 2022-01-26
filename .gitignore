@@ -4,3 +4,4 @@ desktop.ini
 *.pem
 *.ppk
 node_modules
+.venv
