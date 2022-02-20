@@ -78,6 +78,7 @@ const judansen = {
         '高橋道雄'
     ]
 };
+
 const ryuosen = {
     titileName: '竜王戦',
     firstYear: 1988,
@@ -1097,12 +1098,12 @@ titleRecord(kiseisen);
 
 
 console.log(judansen);
-console.log(ryuosen);
-console.log(oisen);
-console.log(ozasen);
-console.log(oshosen);
-console.log(kiosen);
-console.log(eiosen);
-console.log(kiseisen);
+// console.log(ryuosen);
+// console.log(oisen);
+// console.log(ozasen);
+// console.log(oshosen);
+// console.log(kiosen);
+// console.log(eiosen);
+// console.log(kiseisen);
 
 
