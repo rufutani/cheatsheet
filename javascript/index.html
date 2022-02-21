@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=(device-width), initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- ①
+    <p>現在時刻：
+        <span id="result"></span>
+    </p> -->
+
+    <!-- ②
+    <ul>
+        <li>
+            <a href = "https://google.com">Google</a>
+        </li>
+
+        <li>
+            <a href = "https://ricoh.com">Ricoh</a>
+        </li>
+        
+        <li>
+            <a href = "https://apple.com">Apple</a>
+        </li>
+
+        <li>
+            <a href = "https://sony.com">Sony</a>
+        </li>
+
+    </ul> -->
+
+    <!-- ③
+    <form>
+        <label for="time">時刻：
+            <input id="time" name="time" type="text" size="10" />
+        </label>
+    </form> -->
+
+    <!-- ④
+    <ul>
+        <li>
+            <a href="https://ricoh.com" class="link jp">Ricoh</a>
+        </li>
+        <li>
+            <a href="https://Apple.com" class="link us">Apple</a>
+        </li>
+        <li>
+            <a href="https://google.com" class="link us">Google</a>
+        </li>
+        <li>
+            <a href="https://Sony.com" class="link jp">Sony</a>
+        </li>
+    </ul> -->
+
+    <!-- ⑤
+    <ul id="list">
+        <li>
+            <a href="https://ricoh.com" class="link internal jp ourselves">Ricoh</a>
+        </li>
+
+        <li>
+            <a href="https://Apple.com" class="link external us">Apple</a>
+        </li>
+
+        <li>
+            <a href="https://google.com" class="link external us">Google</a>
+        </li>
+
+        <li>
+            <a href="https://sony.com" class="link external jp">Sony</a>
+        </li>
+
+        <li>
+            <a href="https://nintendo.com" class="link external jp">Nintendo</a>
+        </li>
+
+    </ul> -->
+
+    <!-- ⑥
+    <form>
+        <label for="food">一番好きな食べ物は？</label>
+        <select id="food">
+            <option value="ラーメン">ラーメン</option>
+            <option value="お寿司">お寿司</option>
+            <option value="焼肉">焼肉</option>
+        </select>
+        <input type="submit" value="送信" />
+    </form> -->
+
+    <!-- ⑦-1
+    <input type="button" value="ダイアログ表示" onclick="btnClick()" /> -->
+
+    <!-- ⑦-2
+    <input id="btn" type="button" value="ダイアログ表示" /> -->
+
+    <!-- ⑧
+    <img id="icon" src="https://lh4.googleusercontent.com/-5aF2wLR6M7Y/AAAAAAAAAAI/AAAAAAAAAJw/aa3EPW90MrY/photo.jpg" height="200" width="200" border="0" alt="icon" /> -->
+
+    <!-- ⑨
+    <div style="background: #eeeeee;">
+        <div id="result_text">
+            <p style="color: Red;">設定されていません。</p>
+        </div>
+        <div id="result_html">
+            <p style="color: Red;">設定されていません。</p>
+        </div>
+    </div> -->
+
+    <!-- ⑩
+    <form>
+
+        <div>
+            <label for="name">名前：</label>
+            <input id="name" name="name" type="text" size="30" />
+        </div>
+
+        <div>
+            <label for="job">職種：</label>
+            <select id="job" name="job">
+                <option value="designer">デザイナー</option>
+                <option value="engineer">エンジニア</option>
+                <option value="planner">企画</option>
+            </select>
+        </div>
+
+        <input id="btn" type="button" value="送信" />
+
+    </form>
+
+
+    <div id="result">
+    </div> -->
+
+    <!-- ⑪-1
+    <form>
+        <div>
+            <p>あなたの職種は？</p>
+            <label><input type="checkbox" name="job" value="デザイナー" />デザイナー</label>
+            <label><input type="checkbox" name="job" value="エンジニア" />エンジニア</label>
+            <label><input type="checkbox" name="job" value="企画" />企画</label>
+            <input type="button" id="btn" value="送信" />
+        </div>
+    </form>
+
+    <div id="result"></div> -->
+
+    <!-- ⑪-2
+    <form>
+        <label><input id="agree" type="checkbox" value="agree" />利用規約に合意する</label>
+        <input type="button" id="btn" value="送信" />
+    </form>
+    <div id="result"></div> -->
+
+    <!-- ⑫
+    <form>
+        <div>
+            <p>職種は？</p>
+            <label><input type="radio" name="job" value="デザイナー" />デザイナー</label>
+            <label><input type="radio" name="job" value="エンジニア" />エンジニア</label>
+            <label><input type="radio" name="job" value="企画" />企画</label>
+            <input type="button" id="btn" value="送信" />
+        </div>
+    </form>
+    <div id="result"></div>
+
+     -->
+
+    <!-- ⑬
+    <form>
+        <p>あなたの職種は？</p>
+        <label><input type="radio" name="job" value="デザイナー" />デザイナー</label>
+        <label><input type="radio" name="job" value="エンジニア" />エンジニア</label>
+        <label><input type="radio" name="job" value="企画" />企画</label>
+    </form>
+    <form>
+        <p>あなたの勤務地は？</p>
+        <label><input type="radio" name="area" value="東京" />東京</label>
+        <label><input type="radio" name="area" value="横浜" />横浜</label>
+        <label><input type="radio" name="area" value="千葉" />千葉</label>
+        <input type="button" id="btn" value="送信" />
+    </form>
+    <div id="result"></div> -->
+
+    <!-- ⑭
+    <form>
+        <p>あなたの職種は？</p>
+        <label><input type="checkbox" name="job" value="デザイナー" />デザイナー</label>
+        <label><input type="checkbox" name="job" value="エンジニア" />エンジニア</label>
+        <label><input type="checkbox" name="job" value="企画" />企画</label>
+    </form>
+    <form>
+        <p>あなたたの保有スキルは？</p>
+        <label><input type="checkbox" name="skill" value="UIデザイン" />UIデザイン</label>
+        <label><input type="checkbox" name="skill" value="UXデザイン" />UXデザイン</label>
+        <label><input type="checkbox" name="skill" value="フロントエンドエンジニアリング" />フロントエンドエンジニアリング</label>
+        <label><input type="checkbox" name="skill" value="サーバサイドエンジニアリング" />サーバサイドエンジニアリング</label>
+        <label><input type="checkbox" name="skill" value="プロダクトマネジメント" />プロダクトマネジメント</label>
+        <label><input type="checkbox" name="skill" value="プロモーション企画" />プロモーション企画</label>
+    </form>
+    <input type="button" id="btn" value="送信" />
+    <div id="result"></div> -->
+
+    <!-- ⑮
+    <form>
+        <div>
+            <label for="skill">あなたのスキルは？</label>
+            <select id="skill" multiple>
+                <option value="UIデザイン">UIデザイン</option>
+                <option value="UXデザイン">UXデザイン</option>
+                <option value="インダストリアルデザイン">インダストリアルデザイン</option>
+            </select>
+        </div>
+        <div>
+            <label for="area">希望する勤務エリアは？</label>
+            <select id="area" multiple>
+                <option value="東京">Tokyo</option>
+                <option value="横浜">Yokohama</option>
+                <option value="千葉">千葉</option>
+            </select>
+        </div>
+    </form>
+    <input type="button" id="btn" value="送信" />
+    <div id="result"></div> -->
+
+    <!-- ⑯-1
+    <form>
+        <label for="file">ファイル：</label>
+        <input type="file" id="file" name="file" multiple>
+    </form> -->
+
+    <!-- ⑯-2
+    <form>
+        <label for="file">ファイル：</label>
+        <input type="file" id="file" name="file" multiple>
+    </form>
+    <p id="result"></p> -->
+
+    <!-- ⑯-3 -->
+    <form>
+        <label for="file">ファイル：</label>
+        <input type="file" id="file" name="file" /> 
+    </form>
+    <img id="result" />
+
+
+
+
+    <script src="./test2.js"></script>
+</body>
+
+</html>
