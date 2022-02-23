@@ -291,14 +291,104 @@
 //     }, true);
 // });
 
-// ⑯-3
-window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('file').addEventListener('change', () => {
-        let input = document.getElementById('file').files[0];
-        let reader = new FileReader();
-        reader.addEventListener('load', () => {
-            document.getElementById('result').src = reader.result;
-        });
-        reader.readAsDataURL(input);
-    });
-});
+// // ⑯-3
+// window.addEventListener('DOMContentLoaded', () => {
+//     document.getElementById('file').addEventListener('change', () => {
+//         let input = document.getElementById('file').files[0];
+//         let reader = new FileReader();
+//         reader.addEventListener('load', () => {
+//             document.getElementById('result').src = reader.result;
+//         });
+//         reader.readAsDataURL(input);
+//     });
+// });
+
+// ⑰
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     document.getElementById('btn').addEventListener('click', () => {
+//         let name = document.getElementById('name');
+//         let url = document.getElementById('url');
+
+//         let anchor = document.createElement('a');
+//         anchor.href = url.value;
+//         let text = document.createTextNode(name.value);
+//         anchor.appendChild(text);
+//         let br = document.createElement('br');
+//         let list = document.getElementById('list');
+//         list.appendChild(anchor);
+//         list.appendChild(br);
+//     });
+// });
+
+// // ⑱-1
+// document.addEventListener('DOMContentLoaded', () => {
+//     let books = [
+//         { title: '青の書', price: 3000 },
+//         { title: '赤の書', price: 4000 },
+//         { title: '黒の書', price: 5000 }
+//     ];
+//     let list = document.getElementById('list');
+//     for (let i = 0; i < books.length; i++) {
+//         let book = books[i];
+//         let li = document.createElement('li');
+//         let text = document.createTextNode(`${book.title}:${book.price}円`);
+//         li.appendChild(text);
+//         list.appendChild(li);
+//     };
+// });
+
+// // ⑱-2
+// document.addEventListener('DOMContentLoaded', () => {
+//     let books = [
+//         { title: '青の書', price: 3000 },
+//         { title: '赤の書', price: 4000 },
+//         { title: '黒の書', price: 5000 }
+//     ];
+//     // let list = document.getElementById('list');
+//     let frag = document.createDocumentFragment();
+//     for (let i = 0; i < books.length; i++) {
+//         let book = books[i];
+//         let li = document.createElement('li');
+//         let text = document.createTextNode(`${book.title}:${book.price}円`);
+//         li.appendChild(text);
+//         frag.appendChild(li);
+//     };
+//     document.getElementById('list').appendChild(frag);
+// });
+
+// ⑲
+// document.addEventListener('DOMContentLoaded', () => {
+//     let list = document.getElementById('list');
+//     let pic = document.getElementById('pic');
+//     let del = document.getElementById('del');
+//     list.addEventListener('click', (e) => {
+//         console.log(e);
+//         let isbn = e.target.getAttribute('data-isbn');
+//         if (isbn) {
+//             let img = document.createElement('img');
+//             img.src = 'https://www.wings.msn.to/books/' + isbn + '/' + isbn + '.jpg';
+//             img.alt = e.target.innerText;
+//             img.height = 150;
+//             img.height = 108;
+//             if (pic.getElementsByTagName('img').length > 0) {
+//                 pic.replaceChild(img, pic.lastChild);
+//             } else {
+//                 del.disabled = false;
+//                 pic.appendChild(img);
+//             };
+//         };
+//     });
+//     del.addEventListener('click', () => {
+//         pic.removeChild(pic.lastChild);
+//         del.disabled = true;
+//     });
+
+const Human = function(name) {
+    this.name = name;
+};
+Human.prototype.greet = function () {
+    console.log(`My name is ${this.name}.`)
+};
+let alice = new Human('Alice');
+alice.greet();
