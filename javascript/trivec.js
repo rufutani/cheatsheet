@@ -84,22 +84,3 @@ const degFromVectors = (v0, v1) => {
     const value = radToDeg(rad);
     return value;
 };
-
-
-
-
-let V = [1, 0, 0];
-let W = [0, 1, 0];
-console.log(degFromVectors(V, W));
-console.log(radFromVectors(V, W));
-// V = normarize(V);
-// W = normarize(W);
-// let dotValue = getDot(V, W);
-// let rad = Math.acos(dotValue);
-// let deg = radToDeg(rad);
-// let crossValue = getCross(V, W);
-// console.log(crossValue);
-// console.log(rad);
-// console.log(deg);
-
-// let a = [1]

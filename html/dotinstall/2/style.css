@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "AXIS Std";
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh
+}
+
+header {
+    background: pink;
+    height: 100px;
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 200px;
+    height: 80px;
+    background-color: silver;
+    text-align: center;
+    vertical-align: middle;
+    display: table;
+    /* position: absolute;
+    top: calc(50% - 20px);
+    left: calc(50% - 40px) */
+}
+
+p {
+    display: table-cell;
+    vertical-align: middle;
+    border: 1px solid #000;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+}
+
+nav {
+    background: tomato;
+    width: 150px
+}
+
+main {
+    background: skyblue;
+    flex: 1;
+}
+
+aside {
+    background: orange;
+    width: 20vw;
+    min-width: 200px;
+}
+
+footer {
+    background: silver;
+}
